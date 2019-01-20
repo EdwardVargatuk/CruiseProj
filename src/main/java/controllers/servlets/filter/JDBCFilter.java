@@ -1,20 +1,23 @@
 package controllers.servlets.filter;
 
-import connection.mysql.MySqlConnectionPool;
+import connection.ConnectionUtils;
+import connection.MySqlConnectionPool;
 import controllers.servlets.command.MyUtils;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Map;
 
 @WebFilter(filterName = "jdbcFilter", urlPatterns = {"/*"})
 public class JDBCFilter implements Filter {
-//    private static final Logger log = LogManager.getLogger(JDBCFilter.class.getName());
+    private static final Logger log = LogManager.getLogger(JDBCFilter.class.getName());
 
     public JDBCFilter() {
     }
@@ -66,7 +69,7 @@ public class JDBCFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
-//        log.log(Level.INFO, "in filter");
+        log.log(Level.INFO, "jdbc filter start");
         HttpServletRequest req = (HttpServletRequest) request;
 
         // Открыть  connection (соединение) только для request со специальной ссылкой.
@@ -80,14 +83,11 @@ public class JDBCFilter implements Filter {
             Connection conn = null;
             try {
                 // Создать объект Connection подключенный к database.
-                try {
-                    Connection con = MySqlConnectionPool.getConnection();
-                    System.out.println("connect");
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+
+                    conn = MySqlConnectionPool.getConnection();
+
                 // Настроить автоматический commit false, чтобы активно контролировать.
-//                conn.setAutoCommit(false);
+                conn.setAutoCommit(false);
 
                 // Сохранить объект Connection в attribute в request.
                 MyUtils.storeConnection(request, conn);
@@ -97,25 +97,14 @@ public class JDBCFilter implements Filter {
                 chain.doFilter(request, response);
 
                 // Вызвать метод commit() чтобы завершить транзакцию с DB.
-//                conn.commit();
+                conn.commit();
             } catch (Exception e) {
-                e.printStackTrace();
-                try {
-                    if (conn != null) {
-                        conn.rollback();
-                    }
-                } catch (SQLException e1) {
-                    e1.printStackTrace();
-                }
+                log.log(Level.ERROR, "connection false "+e);
+                ConnectionUtils.rollbackQuietly(conn);
                 throw new ServletException();
             } finally {
-                try {
-                    if (conn != null) {
-                        conn.close();
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+               ConnectionUtils.closeQuietly(conn);
+                log.log(Level.INFO, "jdbc filter successful");
             }
         }
         // Для обычных request (image,css,html,..)
