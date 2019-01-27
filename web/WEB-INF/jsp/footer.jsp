@@ -9,14 +9,6 @@
 <html>
 <head><title>Footer</title></head>
 <body>
-<%--<hr/>--%>
-<%--<style type="text/css">--%>
-<%--#footer {--%>
-<%--position : absolute;--%>
-<%--width: 100%;--%>
-<%--text-align:center;--%>
-<%--}--%>
-<%--</style>--%>
 <div
         style=" text-align: center; padding: 5px; margin-top: 10px;"
         id="footer">

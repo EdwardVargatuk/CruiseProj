@@ -12,18 +12,13 @@
     <title>header</title>
     <style>
         <%@include file="/WEB-INF/css/style9.css" %>
-        <%--<%@include file="/WEB-INF/css/logStyle.css" %>--%>
     </style>
 </head>
 <body>
-<%--<h2 align="center">Welcome</h2>--%>
-<%--<hr/>--%>
 <div style="text-align: center;">
     <h1>Welcome to Cruises of your dream</h1>
 </div>
-<div
-        style="float: right;  padding: 10px; text-align: right;"
->
+<div style="float: right;  padding: 10px; text-align: right;">
     <form name="logoutForm" method="POST" action="controller">
         <input type="hidden" name="command" value="logout"/>
         <tr>
