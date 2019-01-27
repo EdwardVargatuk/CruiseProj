@@ -93,21 +93,21 @@ public class MySqlCruiseDao implements CruiseDao {
             }
             Integer shipId = resultSet.getInt("ship_id");
             String cruiseClass = resultSet.getString("cruise_class");
-            double price = resultSet.getDouble("price");
             java.util.Date date = resultSet.getDate("date");
+            double price = resultSet.getDouble("price");
 
             cruise = new Cruise(id, shipId, Cruise.CruiseClass.valueOf(cruiseClass), price, date);
             resultSet.close();
             statement.close();
         } catch (SQLException e) {
-            log.log(Level.ERROR, "Can't get cruise by id" + e);
+            log.log(Level.ERROR, "Can't get cruise by id " + id + " " + e);
         }
         return cruise;
     }
 
     @Override
-    public Cruise getByShipIdAndCruiseClass(Integer shipId, String cruiseClass){
-    String sqlStatement = "SELECT id, ship_id, cruise_class, price, date FROM cruise WHERE ship_id = ? AND cruise_class =?";
+    public Cruise getByShipIdAndCruiseClass(Integer shipId, String cruiseClass) {
+        String sqlStatement = "SELECT id, ship_id, cruise_class, price, date FROM cruise WHERE ship_id = ? AND cruise_class =?";
         Cruise cruise = null;
         try (Connection connection = MySqlConnectionPool.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sqlStatement);
@@ -115,7 +115,7 @@ public class MySqlCruiseDao implements CruiseDao {
             statement.setString(2, cruiseClass);
             ResultSet resultSet = statement.executeQuery();
             if (!resultSet.next()) {
-                log.log(Level.INFO, "Cruise with ShipId " + shipId +"and cruise class"+cruiseClass+ " doesn't exist");
+                log.log(Level.INFO, "Cruise with ShipId " + shipId + "and cruise class" + cruiseClass + " doesn't exist");
             }
 
             Integer id = resultSet.getInt("id");

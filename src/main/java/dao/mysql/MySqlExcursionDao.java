@@ -87,7 +87,7 @@ public class MySqlExcursionDao implements ExcursionDao {
                 double excursionPrice = resultSet.getDouble("excursion_price");
                 Excursion excursion = new Excursion(id, excursionName, excursionPrice);
                 excursionList.add(excursion);
-                            }
+            }
             resultSet.close();
             statement.close();
         } catch (SQLException e) {
@@ -114,7 +114,7 @@ public class MySqlExcursionDao implements ExcursionDao {
             resultSet.close();
             statement.close();
         } catch (SQLException e) {
-            log.log(Level.ERROR, "Can't get excursion by id" + e);
+            log.log(Level.ERROR, "Can't get excursion by id " + id + " " + e);
         }
         return excursion;
     }

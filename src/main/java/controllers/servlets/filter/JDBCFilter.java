@@ -2,7 +2,7 @@ package controllers.servlets.filter;
 
 import connection.ConnectionUtils;
 import connection.MySqlConnectionPool;
-import controllers.servlets.command.MyUtils;
+import controllers.utils.MyUtils;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,27 +34,16 @@ public class JDBCFilter implements Filter {
 
     // Проверить является ли Servlet цель текущего request?
     private boolean needJDBC(HttpServletRequest request) {
-        System.out.println("JDBC Filter");
-        //
-        // Servlet Url-pattern: /spath/*
-        //
-        // => /spath
+        log.log(Level.INFO, "JDBC Filter");
         String servletPath = request.getServletPath();
-        // => /abc/mnp
         String pathInfo = request.getPathInfo();
-
         String urlPattern = servletPath;
-
         if (pathInfo != null) {
-            // => /spath/*
             urlPattern = servletPath + "/*";
         }
-
         // Key: servletName.
         // Value: ServletRegistration
-        Map<String, ? extends ServletRegistration> servletRegistrations = request.getServletContext()
-                .getServletRegistrations();
-
+        Map<String, ? extends ServletRegistration> servletRegistrations = request.getServletContext().getServletRegistrations();
         // Коллекционировать все Servlet в вашем WebApp.
         Collection<? extends ServletRegistration> values = servletRegistrations.values();
         for (ServletRegistration sr : values) {
@@ -71,47 +60,32 @@ public class JDBCFilter implements Filter {
             throws IOException, ServletException {
         log.log(Level.INFO, "jdbc filter start");
         HttpServletRequest req = (HttpServletRequest) request;
-
         // Открыть  connection (соединение) только для request со специальной ссылкой.
         // (Например ссылка к servlet, jsp, ..)
         // Избегать открытия Connection для обычных запросов.
         // (Например image, css, javascript,... )
         if (this.needJDBC(req)) {
-
-            System.out.println("Open Connection for: " + req.getServletPath());
-
+            log.log(Level.INFO, "Open Connection for: " + req.getServletPath());
             Connection conn = null;
             try {
-                // Создать объект Connection подключенный к database.
-
-                    conn = MySqlConnectionPool.getConnection();
-
+                conn = MySqlConnectionPool.getConnection();
                 // Настроить автоматический commit false, чтобы активно контролировать.
                 conn.setAutoCommit(false);
-
-                // Сохранить объект Connection в attribute в request.
                 MyUtils.storeConnection(request, conn);
-
-                // Разрешить request продвигаться далее.
-                // (Далее к следующему Filter tiếp или к цели).
                 chain.doFilter(request, response);
-
-                // Вызвать метод commit() чтобы завершить транзакцию с DB.
+                // метод commit() для завершения транзакции с DB.
                 conn.commit();
             } catch (Exception e) {
-                log.log(Level.ERROR, "connection false "+e);
+                log.log(Level.ERROR, "connection false " + e);
                 ConnectionUtils.rollbackQuietly(conn);
                 throw new ServletException();
             } finally {
-               ConnectionUtils.closeQuietly(conn);
+                ConnectionUtils.closeQuietly(conn);
                 log.log(Level.INFO, "jdbc filter successful");
             }
         }
         // Для обычных request (image,css,html,..)
-        // не нужно открывать connection.
         else {
-            // Разрешить request продвигаться далее.
-            // (Далее к следующему Filter tiếp или к цели).
             chain.doFilter(request, response);
         }
 

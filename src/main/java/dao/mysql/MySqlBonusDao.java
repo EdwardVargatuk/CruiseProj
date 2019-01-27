@@ -21,7 +21,7 @@ public class MySqlBonusDao implements BonusDao {
         try (Connection connection = MySqlConnectionPool.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sqlStatement,
                     Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, bonus.getBonuseName());
+            statement.setString(1, bonus.getBonusName());
             int affectedRows = statement.executeUpdate();
             if (affectedRows == 0) {
                 log.log(Level.INFO, "Creating bonus failed: no rows affected");
@@ -59,7 +59,7 @@ public class MySqlBonusDao implements BonusDao {
             resultSet.close();
             statement.close();
         } catch (SQLException e) {
-            log.log(Level.ERROR, "Can't get bonus by id" + e);
+            log.log(Level.ERROR, "Can't get bonus by id" + id + " " + e);
         }
         return bonus;
     }
@@ -70,7 +70,7 @@ public class MySqlBonusDao implements BonusDao {
         String sqlStatement = "UPDATE bonus SET bonus_name = ? WHERE id = ?";
         try (Connection connection = MySqlConnectionPool.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sqlStatement);
-            statement.setString(1, bonus.getBonuseName());
+            statement.setString(1, bonus.getBonusName());
             statement.setInt(2, bonus.getId());
             int affectedRows = statement.executeUpdate();
             if (affectedRows == 0) {

@@ -94,6 +94,28 @@ public class MySqlPortDao implements PortDao {
         return portList;
     }
 
+    @Override
+    public List<Port> getAllByExcursionId(Integer ExcursionId) {
+        String sqlStatement = "SELECT port_name,port_id FROM ports JOIN ports_excursions pe on ports.id = pe.port_id WHERE excursion_id=?";
+        List<Port> portList = new ArrayList<>();
+
+        try (Connection connection = MySqlConnectionPool.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(sqlStatement);
+            statement.setInt(1, ExcursionId);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Integer port_id = resultSet.getInt("port_id");
+                String portName = resultSet.getString("port_name");
+                Port port = new Port(port_id, portName);
+                portList.add(port);
+            }
+            resultSet.close();
+            statement.close();
+        } catch (SQLException e) {
+            log.log(Level.ERROR, "Can't get all port by excursion id " + e);
+        }
+        return portList;
+    }
 
 
     @Override
@@ -112,15 +134,8 @@ public class MySqlPortDao implements PortDao {
             resultSet.close();
             statement.close();
         } catch (SQLException e) {
-            log.log(Level.ERROR, "Can't get port by id" + e);
+            log.log(Level.ERROR, "Can't get port by id " + id + " " + e);
         }
         return port;
-
-    }
-
-    ///////////////////////
-    @Override
-    public Port getByName(String portName) {
-        return null;
     }
 }

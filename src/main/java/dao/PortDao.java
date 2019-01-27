@@ -2,6 +2,7 @@ package dao;
 
 import Beans.Port;
 
+
 import java.util.List;
 
 public interface PortDao {
@@ -16,7 +17,6 @@ public interface PortDao {
 
     Port getById(Integer id);
 
-    Port getByName(String portName);
-
+    List<Port> getAllByExcursionId(Integer ExcursionId);
 
 }

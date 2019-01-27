@@ -16,4 +16,6 @@ public interface PortExcursionDao {
 
     PortExcursion getByPortIdAndExcursionId(Integer portId, Integer excursionId);
 
+    List<PortExcursion> getAllPortExcursionByExcursionId(Integer excursionId, Integer portId);
+
 }

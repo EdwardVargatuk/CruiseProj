@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.Connection;
 
-    //for work JDBC and Cookie Filter
+//for work JDBC and Cookie Filter
 
 public class MyUtils {
 
@@ -17,17 +17,17 @@ public class MyUtils {
     private static final String ATT_NAME_USER_NAME = "ATTRIBUTE_FOR_STORE_USER_NAME_IN_COOKIE";
 
     // Сохранить Connection в attribute в request.
-       public static void storeConnection(ServletRequest request, Connection conn) {
+    public static void storeConnection(ServletRequest request, Connection conn) {
         request.setAttribute(ATT_NAME_CONNECTION, conn);
     }
 
-       public static Connection getStoredConnection(ServletRequest request) {
-           return (Connection) request.getAttribute(ATT_NAME_CONNECTION);
+    public static Connection getStoredConnection(ServletRequest request) {
+        return (Connection) request.getAttribute(ATT_NAME_CONNECTION);
     }
 
     // Сохранить информацию пользователя, который вошел в систему (login) в Session.
     public static void storeLoginedUser(HttpSession session, Client loginedUser) {
-            session.setAttribute("loginedUser", loginedUser);
+        session.setAttribute("loginedUser", loginedUser);
     }
 
     // Получить информацию пользователя, сохраненная в Session.
@@ -37,7 +37,6 @@ public class MyUtils {
 
     // Сохранить информацию пользователя в Cookie.
     public static void storeUserCookie(HttpServletResponse response, Client client) {
-        System.out.println("Store user cookie");
         Cookie cookieUserName = new Cookie(ATT_NAME_USER_NAME, client.getUserName());
         cookieUserName.setMaxAge(24 * 60 * 60);
         response.addCookie(cookieUserName);

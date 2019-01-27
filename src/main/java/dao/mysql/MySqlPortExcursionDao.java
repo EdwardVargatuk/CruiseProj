@@ -113,7 +113,6 @@ public class MySqlPortExcursionDao implements PortExcursionDao {
             Integer port_id = resultSet.getInt("port_id");
             Integer excursion_id = resultSet.getInt("excursion_id");
 
-
             portExcursion = new PortExcursion(port_id, excursion_id);
             resultSet.close();
             statement.close();
@@ -121,6 +120,33 @@ public class MySqlPortExcursionDao implements PortExcursionDao {
             log.log(Level.ERROR, "Can't get PortExcursion by port and excursion id" + e);
         }
         return portExcursion;
+    }
+
+    @Override
+    public List<PortExcursion> getAllPortExcursionByExcursionId(Integer excursionId, Integer portId) {
+        String sqlStatement = "SELECT ports.port_name, port_id,  excursion_id, excursion_name, excursion_price FROM ports INNER JOIN ports_excursions pe on ports.id = pe.port_id INNER JOIN excursion e on pe.excursion_id = e.id where excursion_id=? and port_id=?";
+        List<PortExcursion> portExcursionList = new ArrayList<>();
+        try (Connection connection = MySqlConnectionPool.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(sqlStatement);
+            statement.setInt(1, excursionId);
+            statement.setInt(2, portId);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Integer port_id = resultSet.getInt("port_id");
+                String portName = resultSet.getString("port_name");
+                Integer excursion_id = resultSet.getInt("excursion_id");
+                String excursionName = resultSet.getString("excursion_name");
+                double excursionPrice = resultSet.getDouble("excursion_price");
+
+                PortExcursion portExcursion = new PortExcursion(port_id, excursion_id, portName, excursionName, excursionPrice);
+                portExcursionList.add(portExcursion);
+            }
+            resultSet.close();
+            statement.close();
+        } catch (SQLException e) {
+            log.log(Level.ERROR, "Can't get port by excursion id " + e);
+        }
+        return portExcursionList;
     }
 
 }

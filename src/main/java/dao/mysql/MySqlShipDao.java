@@ -129,7 +129,7 @@ public class MySqlShipDao implements ShipDao {
             resultSet.close();
             statement.close();
         } catch (SQLException e) {
-            log.log(Level.ERROR, "Can't get ship" + e);
+            log.log(Level.ERROR, "Can't get ship by id " + id + " " + e);
         }
         return ship;
     }
@@ -147,16 +147,16 @@ public class MySqlShipDao implements ShipDao {
                 int id = resultSet.getInt("id");
                 String shipName = resultSet.getString("ship_name");
                 int passengerCapacity = (resultSet.getInt("passenger_capacity"));
-                Integer countOfPorts = resultSet.getInt("count_of_ports");
+                int countOfPorts = resultSet.getInt("count_of_ports");
+                int staff = resultSet.getInt("staff");
                 int tourDuration = resultSet.getInt("tour_duration");
-                Integer staff = resultSet.getInt("staff");
 
                 ship = new Ship(id, shipName, passengerCapacity, countOfPorts, tourDuration, staff);
             }
             resultSet.close();
             statement.close();
         } catch (SQLException e) {
-            log.log(Level.ERROR, "Can't get ship by name" + e);
+            log.log(Level.ERROR, "Can't get ship by name " + name + " " + e);
         }
         return ship;
     }
