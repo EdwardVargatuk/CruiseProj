@@ -25,11 +25,6 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client checkLogin(String login, String password) {
-        return MySqlDaoFactory.getInstance().getClientDao().checkLogin(login, password);
-    }
-
-    @Override
     public void update(Client client) {
         MySqlDaoFactory.getInstance().getClientDao().update(client);
     }
@@ -44,12 +39,12 @@ public class ClientServiceImpl implements ClientService {
         return MySqlDaoFactory.getInstance().getClientDao().getAll();
     }
 
-
-
-
     //not use yet
-    @Override
-    public List<Order> getAllOrders() {
-        return null;
-    }
+//    @Override
+//    public List<Order> getAllOrders(Integer clientId, Integer cruiseId) {
+//        List<Order> orderList = MySqlDaoFactory.getInstance().getOrderDao().getAll();
+//        for (Order orders : orderList) {
+//            MySqlDaoFactory.getInstance().getOrderDao().getByClientIdAndCruiseId(clientId, cruiseId);
+//        }
+//    }
 }

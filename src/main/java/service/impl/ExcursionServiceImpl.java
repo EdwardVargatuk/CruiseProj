@@ -1,5 +1,6 @@
 package service.impl;
 
+import Beans.Cruise;
 import Beans.Excursion;
 import dao.mysql.MySqlDaoFactory;
 import service.ExcursionService;
@@ -34,6 +35,15 @@ public class ExcursionServiceImpl implements ExcursionService {
         List<Excursion> excursionList = new ArrayList<>();
         MySqlDaoFactory.getInstance().getPortExcursionDao().getAllByPortId(portId)
                 .forEach(excursion -> excursionList.add(MySqlDaoFactory.getInstance().getExcursionDao().getById(excursion.getExcursionId())));
+        return excursionList;
+    }
+
+    @Override
+    public List<Excursion> getAllByCruise(Cruise cruise) {
+        List<Excursion> excursionList = new ArrayList<>();
+        ServiceFactoryImpl.getInstance().getPortService().getAllByShipId(cruise.getShip_id())
+                .forEach(port -> excursionList.addAll( ServiceFactoryImpl.getInstance().getExcursionService()
+                        .getAllByPortId(port.getId())));
         return excursionList;
     }
 

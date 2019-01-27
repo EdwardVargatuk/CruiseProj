@@ -13,14 +13,12 @@ public interface ClientService {
 
     Client getByLogin(String login);
 
-    Client checkLogin(String login, String password);
-
     void update(Client client);
 
     void delete(Client client);
 
     List<Client> getAll();
 
-    List<Order> getAllOrders();
+//    List<Order> getAllOrders(Integer clientId, Integer cruiseId);
 
 }

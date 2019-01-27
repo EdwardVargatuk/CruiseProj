@@ -8,6 +8,37 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+
+    <!--<filter>-->
+        <!--<filter-name>AccessFilter</filter-name>-->
+        <!--<filter-class>controllers.servlets.filter.AccessFilter</filter-class>-->
+        <!--<init-param>-->
+            <!--<param-name>admin</param-name>-->
+            <!--<param-value>adminMenu-->
+                <!--all_clients all_orders all_goods-->
+                <!--goods_setting edit_goods-->
+            <!--</param-value>-->
+        <!--</init-param>-->
+        <!--<init-param>-->
+            <!--<param-name>client</param-name>-->
+            <!--<param-value>myOrder toorder updateOrder confirmOrder</param-value>-->
+        <!--</init-param>-->
+        <!--<init-param>-->
+            <!--<param-name>common</param-name>-->
+            <!--<param-value>logout</param-value>-->
+        <!--</init-param>-->
+        <!--<init-param>-->
+            <!--<param-name>out-of-control</param-name>-->
+            <!--<param-value>login tourInfo home-->
+            <!--</param-value>-->
+        <!--</init-param>-->
+    <!--</filter>-->
+
+    <!--<filter-mapping>-->
+        <!--<filter-name>AccessFilter</filter-name>-->
+        <!--<servlet-name>Controller</servlet-name>-->
+    <!--</filter-mapping>-->
+
     <filter-mapping>
         <filter-name>cookieFilter</filter-name>
         <url-pattern>/*</url-pattern>
@@ -15,6 +46,10 @@
 
     <error-page>
         <error-code>404</error-code>
+        <location>/WEB-INF/jsp/error/error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
         <location>/WEB-INF/jsp/error/error.jsp</location>
     </error-page>
     <error-page>

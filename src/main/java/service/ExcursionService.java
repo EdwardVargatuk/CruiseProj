@@ -1,5 +1,6 @@
 package service;
 
+import Beans.Cruise;
 import Beans.Excursion;
 
 import java.util.List;
@@ -15,6 +16,8 @@ public interface ExcursionService {
     List<Excursion> getAll();
 
     List<Excursion> getAllByPortId(Integer portId);
+
+    List<Excursion> getAllByCruise(Cruise cruise);
 
 
     Excursion getById(Integer id);

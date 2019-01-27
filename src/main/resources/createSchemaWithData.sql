@@ -1,20 +1,10 @@
 -- MySQL Workbench Forward Engineering
 
 
-# SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS;
-# SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION;
-# SET NAMES utf8;
-# SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-# SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-# SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO';
-# SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0;
 SET @OLD_UNIQUE_CHECKS = @@UNIQUE_CHECKS, UNIQUE_CHECKS = 0;
 SET @OLD_FOREIGN_KEY_CHECKS = @@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS = 0;
 SET @OLD_SQL_MODE = @@SQL_MODE, SQL_MODE = 'TRADITIONAL,ALLOW_INVALID_DATES';
 
--- -----------------------------------------------------
--- Schema cruisedb
--- -----------------------------------------------------
 
 -- -----------------------------------------------------
 -- Schema cruisedb
@@ -30,12 +20,10 @@ CREATE TABLE IF NOT EXISTS `cruisedb`.`user`
   `id`        INT                      NOT NULL AUTO_INCREMENT,
   `user_name` VARCHAR(30)              NOT NULL,
   `password`  VARCHAR(12)              NOT NULL,
-  `role`      ENUM ('OWNER', 'CLIENT') NULL,
-  `order_id`  INT                      NULL,
+  `role`      ENUM ('OWNER', 'CLIENT') NOT NULL,
 
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (order_id)
-    REFERENCES cruisedb.`order` (id)
+  PRIMARY KEY (`id`)
+
 )
   ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8
@@ -51,9 +39,7 @@ CREATE TABLE IF NOT EXISTS `cruisedb`.`cruise`
   `cruise_class` ENUM ('USUAL', 'PREMIUM') NOT NULL,
   `price`        DOUBLE                    NOT NULL,
   `date`         DATE                      NOT NULL,
-  #   `countOfPorts`     INT          NOT NULL,
-  #   `tourDuration`      INT          NOT NULL,
-  #   `staff`              INT          NOT NULL,
+
   PRIMARY KEY (`id`),
   FOREIGN KEY (ship_id)
     REFERENCES cruisedb.ship (id)
@@ -72,12 +58,13 @@ CREATE TABLE IF NOT EXISTS `cruisedb`.`order`
   `id`          INT    NOT NULL AUTO_INCREMENT,
   `cruise_id`   INT    NOT NULL,
   `total_price` DOUBLE NOT NULL,
+  `client_id`   INT    NOT NULL,
 
   PRIMARY KEY (`id`),
   FOREIGN KEY (cruise_id)
-    REFERENCES cruisedb.cruise (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
+    REFERENCES cruisedb.cruise (id),
+  FOREIGN KEY (client_id)
+    REFERENCES cruisedb.user (id)
 )
   ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8
@@ -89,13 +76,12 @@ CREATE TABLE IF NOT EXISTS `cruisedb`.`order`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `cruisedb`.`ship`
 (
-  `id`                INT         NOT NULL AUTO_INCREMENT,
+  `id`                 INT         NOT NULL AUTO_INCREMENT,
   `ship_name`          VARCHAR(30) NOT NULL,
   `passenger_capacity` INT         NOT NULL,
-  #   `route`              VARCHAR(255) NOT NULL,
-  `count_of_ports`      INT         NOT NULL,
+  `count_of_ports`     INT         NOT NULL,
   `tour_duration`      INT         NOT NULL,
-  `staff`             INT         NOT NULL,
+  `staff`              INT         NOT NULL,
   PRIMARY KEY (`id`)
 )
   ENGINE = InnoDB
@@ -109,17 +95,11 @@ CREATE TABLE IF NOT EXISTS `cruisedb`.`ship`
 CREATE TABLE IF NOT EXISTS `cruisedb`.`ports`
 (
   `id`        INT         NOT NULL AUTO_INCREMENT,
-  #   `ship_id`   INT         NOT NULL,
   `port_name` VARCHAR(30) NOT NULL,
-  #   `country`   VARCHAR(30) NOT NULL,
+
 
   PRIMARY KEY (`id`)
-  #   INDEX ship_id (ship_id),
 
-  #   FOREIGN KEY (ship_id)
-  #     REFERENCES cruisedb.ship (id)
-  #     ON DELETE NO ACTION
-  #     ON UPDATE NO ACTION
 )
   ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8
@@ -131,23 +111,16 @@ CREATE TABLE IF NOT EXISTS `cruisedb`.`ports`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `cruisedb`.`ship_ports`
 (
-  #   `id`        INT         NOT NULL AUTO_INCREMENT,
+
   `ship_id` INT NOT NULL,
   `port_id` INT NOT NULL,
-  #   `country`   VARCHAR(30) NOT NULL,
 
-  #   PRIMARY KEY (`id`)
-  #   INDEX ship_id (ship_id),
 
   FOREIGN KEY (ship_id)
     REFERENCES cruisedb.ship (id),
-  #       ON DELETE NO ACTION
-  #       ON UPDATE NO ACTION
 
   FOREIGN KEY (port_id)
     REFERENCES cruisedb.ports (id)
-
-
 )
   ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8
@@ -162,24 +135,8 @@ CREATE TABLE IF NOT EXISTS `cruisedb`.`excursion`
   `id`              INT         NOT NULL AUTO_INCREMENT,
   `excursion_name`  VARCHAR(30) NOT NULL,
   `excursion_price` DOUBLE      NOT NULL,
-  #   `ship_id` INT NOT NULL,
 
-  #
   PRIMARY KEY (`id`)
-  #   INDEX ship_id (ship_id),
-  #   #   INDEX port_id (port_id),
-  #   FOREIGN KEY (ship_id)
-  #     REFERENCES cruisedb.ship (id)
-
-  #
-  #   FOREIGN KEY (port_id)
-  #     REFERENCES cruisedb.ports (id)
-  #
-  #
-  #     ON DELETE NO ACTION
-  #     ON UPDATE NO ACTION
-
-
 )
   ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8
@@ -212,7 +169,6 @@ CREATE TABLE IF NOT EXISTS `cruisedb`.`bonus`
   `id`         INT         NOT NULL AUTO_INCREMENT,
   `bonus_name` VARCHAR(30) NOT NULL,
   PRIMARY KEY (`id`)
-  #   INDEX ship_id (ship_id),
 )
   ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8
@@ -236,43 +192,7 @@ CREATE TABLE IF NOT EXISTS `cruisedb`.`cruise_bonus`
   COLLATE = utf8_unicode_ci;
 
 
-#
-# -- -----------------------------------------------------
-# -- Table `cruisedb`.`route`
-# -- -----------------------------------------------------
-# CREATE TABLE IF NOT EXISTS `cruisedb`.`route`
-# (
-#   `id`      INT NOT NULL AUTO_INCREMENT,
-#   `ship_id` INT NOT NULL,
-#   `port_id` INT NOT NULL,
-#
-#   PRIMARY KEY (`id`),
-#   INDEX ship_id (ship_id),
-#   #   INDEX port_id (port_id),
-#   FOREIGN KEY (ship_id)
-#     REFERENCES cruisedb.ship (id)
-#
-#     #
-#     #   FOREIGN KEY (port_id)
-#     #     REFERENCES cruisedb.ports (id)
-#
-#
-#     ON DELETE NO ACTION
-#     ON UPDATE NO ACTION
-#
-#
-# )
-#   ENGINE = InnoDB
-#   DEFAULT CHARACTER SET = utf8
-#   COLLATE = utf8_unicode_ci;
 
-# SET SQL_MODE=@OLD_SQL_MODE;
-# SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-# SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-# SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT;
-# SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS;
-# SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION;
-# SET SQL_NOTES=@OLD_SQL_NOTES;
 SET SQL_MODE = @OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS = @OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS = @OLD_UNIQUE_CHECKS;
@@ -284,30 +204,30 @@ START TRANSACTION;
 USE `cruisedb`;
 INSERT INTO `cruisedb`.`user` (`id`, `user_name`, `password`, `role`)
 VALUES (1, 'Ed', 'admin', 'OWNER');
-INSERT INTO `cruisedb`.`user` (`id`, `user_name`, `password`)
-VALUES (2, 'Mark', '123');
-INSERT INTO `cruisedb`.`user` (`id`, `user_name`, `password`)
-VALUES (3, 'Сергей', '345');
-INSERT INTO `cruisedb`.`user` (`id`, `user_name`, `password`)
-VALUES (4, 'Виктор', '679');
-INSERT INTO `cruisedb`.`user` (`id`, `user_name`, `password`)
-VALUES (5, 'Ann', '91011');
-INSERT INTO `cruisedb`.`user` (`id`, `user_name`, `password`)
-VALUES (6, 'Emmi', '121314');
-INSERT INTO `cruisedb`.`user` (`id`, `user_name`, `password`)
-VALUES (7, 'Aleks', '151617');
-INSERT INTO `cruisedb`.`user` (`id`, `user_name`, `password`)
-VALUES (8, 'Ben', '181920');
-INSERT INTO `cruisedb`.`user` (`id`, `user_name`, `password`)
-VALUES (9, 'Holly', '212223');
-INSERT INTO `cruisedb`.`user` (`id`, `user_name`, `password`)
-VALUES (10, 'Marta', '242526');
-INSERT INTO `cruisedb`.`user` (`id`, `user_name`, `password`)
-VALUES (11, 'Tom', '272829');
-INSERT INTO `cruisedb`.`user` (`id`, `user_name`, `password`)
-VALUES (12, 'Bob', '303132');
-INSERT INTO `cruisedb`.`user` (`id`, `user_name`, `password`)
-VALUES (13, 'Jane', '333435');
+INSERT INTO `cruisedb`.`user` (`id`, `user_name`, `password`, `role`)
+VALUES (2, 'Mark', '123', 'CLIENT');
+INSERT INTO `cruisedb`.`user` (`id`, `user_name`, `password`, `role`)
+VALUES (3, 'Сергей', '345', 'CLIENT');
+INSERT INTO `cruisedb`.`user` (`id`, `user_name`, `password`, `role`)
+VALUES (4, 'Виктор', '679', 'CLIENT');
+INSERT INTO `cruisedb`.`user` (`id`, `user_name`, `password`, `role`)
+VALUES (5, 'Ann', '91011', 'CLIENT');
+INSERT INTO `cruisedb`.`user` (`id`, `user_name`, `password`, `role`)
+VALUES (6, 'Emmi', '121314', 'CLIENT');
+INSERT INTO `cruisedb`.`user` (`id`, `user_name`, `password`, `role`)
+VALUES (7, 'Aleks', '151617', 'CLIENT');
+INSERT INTO `cruisedb`.`user` (`id`, `user_name`, `password`, `role`)
+VALUES (8, 'Ben', '181920', 'CLIENT');
+INSERT INTO `cruisedb`.`user` (`id`, `user_name`, `password`, `role`)
+VALUES (9, 'Holly', '212223', 'CLIENT');
+INSERT INTO `cruisedb`.`user` (`id`, `user_name`, `password`, `role`)
+VALUES (10, 'Marta', '242526', 'CLIENT');
+INSERT INTO `cruisedb`.`user` (`id`, `user_name`, `password`, `role`)
+VALUES (11, 'Tom', '272829', 'CLIENT');
+INSERT INTO `cruisedb`.`user` (`id`, `user_name`, `password`, `role`)
+VALUES (12, 'Bob', '303132', 'CLIENT');
+INSERT INTO `cruisedb`.`user` (`id`, `user_name`, `password`, `role`)
+VALUES (13, 'Jane', '333435', 'CLIENT');
 
 COMMIT;
 
@@ -460,10 +380,6 @@ INSERT INTO `cruisedb`.`cruise` (`id`, `ship_id`, `cruise_class`, `price`, `date
 VALUES (1, 1, 'USUAL', 1499, '2019.01.25');
 INSERT INTO `cruisedb`.`cruise` (`id`, `ship_id`, `cruise_class`, `price`, `date`)
 VALUES (2, 1, 'PREMIUM', 1899, '2019.01.25');
-# INSERT INTO `cruisedb`.`cruise` (`id`, `ship_id`, `cruise_name`, `price`, `date`)
-# VALUES (3, 1, 'SILJA LINE Usual', 1499, '2019.02.15');
-# INSERT INTO `cruisedb`.`cruise` (`id`, `ship_id`, `cruise_name`, `price`, `date`)
-# VALUES (4, 1, 'SILJA LINE Usual', 1899, '2019.02.15');
 INSERT INTO `cruisedb`.`cruise` (`id`, `ship_id`, `cruise_class`, `price`, `date`)
 VALUES (3, 2, 'USUAL', 699.9, '2019.02.05');
 INSERT INTO `cruisedb`.`cruise` (`id`, `ship_id`, `cruise_class`, `price`, `date`)
@@ -499,18 +415,5 @@ VALUES (6, 6);
 
 
 COMMIT;
-
-
-#
-# CREATE TABLE IF NOT EXISTS `cruisedb`.`temp` AS (SELECT route.ship_id, GROUP_CONCAT(ports.port_name) as route_ports
-#                                                  FROM cruisedb.route
-#                                                         LEFT JOIN ports ON ports.id = route.port_id
-#                                                  group by route.ship_id);
-#
-# UPDATE ship
-# SET route = (SELECT route_ports FROM temp WHERE ship_id = ship.id);
--- -----------------------------------------------------
--- Data for table `cruisedb`.`ship`
--- -----------------------------------------------------
 
 

@@ -15,11 +15,7 @@ public class CruiseServiceImpl implements CruiseService {
 
     @Override
     public Cruise getById(Integer id) {
-
-////////////////// not yet
-        Cruise cruise = MySqlDaoFactory.getInstance().getCruiseDao().getById(id);
-//cruise.setClientList(ServiceFactoryImpl.getInstance().getClientService());
-        return cruise;
+        return MySqlDaoFactory.getInstance().getCruiseDao().getById(id);
     }
 
     @Override

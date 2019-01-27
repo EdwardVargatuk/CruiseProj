@@ -15,4 +15,6 @@ public interface OrderService {
     List<Order> getAll();
 
     Order getById(Integer id);
+
+    Order getByClientIdAndCruiseId(Integer clientId, Integer cruiseId);
 }

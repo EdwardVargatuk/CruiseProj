@@ -1,6 +1,7 @@
 package service;
 
 import Beans.Port;
+import Beans.PortExcursion;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface PortService {
     List<Port> getAll();
 
     Port getById(Integer id);
+
+    List<PortExcursion> getAllPortExcursionByExcursionId(Integer excursionId, Integer portId);
 }

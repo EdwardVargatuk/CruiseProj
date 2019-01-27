@@ -2,6 +2,7 @@ package service.impl;
 
 import Beans.Port;
 
+import Beans.PortExcursion;
 import dao.mysql.MySqlDaoFactory;
 import service.PortService;
 
@@ -28,8 +29,6 @@ public class PortServiceImpl implements PortService {
 
     @Override
     public List<Port> getAllByShipId(Integer shipId) {
-
-
         List<Port> portList = new ArrayList<>();
         MySqlDaoFactory.getInstance().getShipPortsDao().getAllByShipId(shipId)
                 .forEach(ports -> portList.add(MySqlDaoFactory.getInstance().getPortDao().getById(ports.getPortId())));
@@ -44,6 +43,11 @@ public class PortServiceImpl implements PortService {
     @Override
     public Port getById(Integer id) {
         return MySqlDaoFactory.getInstance().getPortDao().getById(id);
+    }
+
+    @Override
+    public List<PortExcursion> getAllPortExcursionByExcursionId(Integer excursionId, Integer portId) {
+        return MySqlDaoFactory.getInstance().getPortExcursionDao().getAllPortExcursionByExcursionId(excursionId, portId);
     }
 
 }
