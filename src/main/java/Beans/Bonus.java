@@ -1,28 +1,28 @@
 package Beans;
 
 public class Bonus extends Entity {
-    private String bonuseName;
+    private String bonusName;
 
     public Bonus() {
     }
 
-    public Bonus(int id, String bonuseName) {
+    public Bonus(int id, String bonusName) {
         super(id);
-        this.bonuseName = bonuseName;
+        this.bonusName = bonusName;
     }
 
-    public String getBonuseName() {
-        return bonuseName;
+    public String getBonusName() {
+        return bonusName;
     }
 
-    public void setBonuseName(String bonuseName) {
-        this.bonuseName = bonuseName;
+    public void setBonusName(String bonusName) {
+        this.bonusName = bonusName;
     }
 
     @Override
     public String toString() {
         return "Bonus{" +
-                "bonuseName='" + bonuseName + '\'' +
+                "bonusName='" + bonusName + '\'' +
                 '}';
     }
 }

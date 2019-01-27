@@ -96,7 +96,6 @@ public class Ship extends Entity {
         super(id);
         this.shipName = shipName;
         this.passengerCapacity = passengerCapacity;
-//        this.route = route;
         this.countOfPorts = countOfPorts;
         this.tourDuration = tourDuration;
         this.staff = staff;

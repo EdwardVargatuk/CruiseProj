@@ -27,19 +27,25 @@ public class Cruise extends Entity {
         USUAL, PREMIUM
     }
 
-
-
-
     private Integer ship_id;
     private CruiseClass cruiseClass;
     private double price;
     private Date date;
-
-//    private Ship ship;
     private List<Client> clientList;
 
 
     public Cruise() {
+    }
+
+    @Override
+    public String toString() {
+        return "Cruise{" +
+                "ship_id=" + ship_id +
+                ", cruiseClass=" + cruiseClass +
+                ", price=" + price +
+                ", date=" + date +
+                ", clientList=" + clientList +
+                '}';
     }
 
     public Integer getShip_id() {

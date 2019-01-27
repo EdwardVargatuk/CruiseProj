@@ -2,24 +2,39 @@ package Beans;
 
 public class Order extends Entity {
 
-    public Order(int id, int cruiseId, double totalPrice) {
+    public Order(Integer id, Integer cruiseId, double totalPrice, Integer clientId) {
         super(id);
         this.cruiseId = cruiseId;
         this.totalPrice = totalPrice;
+        this.clientId = clientId;
     }
 
     public Order() {
     }
 
-    private int cruiseId;
+    private Integer cruiseId;
     private  double totalPrice;
+    private Integer clientId;
 
+    public Order(Integer cruiseId, double totalPrice, Integer clientId) {
+        this.cruiseId = cruiseId;
+        this.totalPrice = totalPrice;
+        this.clientId = clientId;
+    }
 
-    public int getCruiseId() {
+    public Integer getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(Integer clientId) {
+        this.clientId = clientId;
+    }
+
+    public Integer getCruiseId() {
         return cruiseId;
     }
 
-    public void setCruiseId(int cruiseId) {
+    public void setCruiseId(Integer cruiseId) {
         this.cruiseId = cruiseId;
     }
 
@@ -33,9 +48,10 @@ public class Order extends Entity {
 
     @Override
     public String toString() {
-        return "Order: {" +
-                "cruise Id=" + cruiseId +
-                ", total Price=" + totalPrice +
+        return "Order{" +
+                "cruiseId=" + cruiseId +
+                ", totalPrice=" + totalPrice +
+                ", clientId=" + clientId +
                 '}';
     }
 }

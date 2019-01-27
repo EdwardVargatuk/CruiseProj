@@ -1,4 +1,4 @@
-package controllers.servlets.command;
+package controllers.utils;
 
 import Beans.Client;
 
@@ -9,10 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.Connection;
 
+    //for work JDBC and Cookie Filter
+
 public class MyUtils {
 
     private static final String ATT_NAME_CONNECTION = "ATTRIBUTE_FOR_CONNECTION";
-
     private static final String ATT_NAME_USER_NAME = "ATTRIBUTE_FOR_STORE_USER_NAME_IN_COOKIE";
 
     // Сохранить Connection в attribute в request.
@@ -21,8 +22,7 @@ public class MyUtils {
     }
 
        public static Connection getStoredConnection(ServletRequest request) {
-        Connection conn = (Connection) request.getAttribute(ATT_NAME_CONNECTION);
-        return conn;
+           return (Connection) request.getAttribute(ATT_NAME_CONNECTION);
     }
 
     // Сохранить информацию пользователя, который вошел в систему (login) в Session.
@@ -32,15 +32,13 @@ public class MyUtils {
 
     // Получить информацию пользователя, сохраненная в Session.
     public static Client getLoginedUser(HttpSession session) {
-        Client loginedUser = (Client) session.getAttribute("loginedUser");
-        return loginedUser;
+        return (Client) session.getAttribute("loginedUser");
     }
 
     // Сохранить информацию пользователя в Cookie.
     public static void storeUserCookie(HttpServletResponse response, Client client) {
         System.out.println("Store user cookie");
         Cookie cookieUserName = new Cookie(ATT_NAME_USER_NAME, client.getUserName());
-        // 1 день (Конвертированный в секунды)
         cookieUserName.setMaxAge(24 * 60 * 60);
         response.addCookie(cookieUserName);
     }
@@ -66,3 +64,4 @@ public class MyUtils {
     }
 
 }
+
