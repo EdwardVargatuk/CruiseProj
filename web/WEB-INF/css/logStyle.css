@@ -7,8 +7,34 @@ h1
     color:deepskyblue;
     text-align:center;
 }
+h3  {
+
+    color:	#D5AD6D; /*if no support for background-clip*/
+
+    background: -webkit-linear-gradient(transparent, transparent),
+    -webkit-linear-gradient(top, rgba(213,173,109,1) 0%,
+            rgba(213,173,109,1) 26%,
+            rgba(226,186,120,1) 35%,
+            rgba(163,126,67,1) 45%, rgba(145,112,59,1) 61%, rgba(213,173,109,1) 100%);
+    font-size: 1.5em;
+
+    font-weight: bold;
+    background: -o-linear-gradient(transparent, transparent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 p
 {
     font-family: "Times New Roman", fantasy;
     font-size:20px;
+}
+.form-submit-button {
+    background: #0066A2;
+    color: white;
+    border-style: outset;
+    border-color: #0066A2;
+    /*height: 50px;*/
+    /*width: 100px;*/
+    font: bold 15px arial, sans-serif;
+    text-shadow:none;
 }

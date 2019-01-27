@@ -1,14 +1,18 @@
 package controllers.servlets.command;
 
-import controllers.resourse.ConfigurationManager;
+import controllers.utils.ConfigurationManager;
+import controllers.utils.SessionRequestContent;
 
-import javax.servlet.http.HttpServletRequest;
+
+/**
+ * Home command bring to main.jsp
+ *
+ * @author Edward
+ */
 
 public class HomeCommand implements ActionCommand {
     @Override
-    public String execute(HttpServletRequest request) {
-        String page = ConfigurationManager.getProperty("path.page.main");
-
-        return page;
+    public String execute(SessionRequestContent sessionRequestContent) {
+        return ConfigurationManager.getProperty("path.page.main");
     }
 }

@@ -1,16 +1,23 @@
 package controllers.servlets.command;
 
 
-import controllers.resourse.ConfigurationManager;
+import controllers.utils.ConfigurationManager;
+import controllers.utils.SessionRequestContent;
 
-import javax.servlet.http.HttpServletRequest;
+
+/**
+ * Logout command
+ *
+ * @author Edward
+ */
 
 public class LogoutCommand implements ActionCommand {
+
     @Override
-    public String execute(HttpServletRequest request) {
+    public String execute(SessionRequestContent sessionRequestContent) {
         String page = ConfigurationManager.getProperty("path.page.index");
-// уничтожение сессии
-        request.getSession().invalidate();
+        // уничтожение сессии
+        sessionRequestContent.clearSession();
         return page;
     }
 }

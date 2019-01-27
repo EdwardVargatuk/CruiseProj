@@ -1,18 +1,20 @@
 package controllers.servlets.command;
 
 
-import controllers.resourse.ConfigurationManager;
+import controllers.utils.ConfigurationManager;
+import controllers.utils.SessionRequestContent;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
+/**
+ * Empty command - default command
+ *
+ * @author Edward
+ */
 
 public class EmptyCommand implements ActionCommand {
     @Override
-    public String execute(HttpServletRequest request) {
+    public String execute(SessionRequestContent sessionRequestContent) {
         /* в случае ошибки или прямого обращения к контроллеру
-         * переадресация на страницу ввода логина */
-
-        String page = ConfigurationManager.getProperty("path.page.login");
-        return page;
+         * переадресация на страницу ввода логина*/
+        return ConfigurationManager.getProperty("path.page.login");
     }
 }

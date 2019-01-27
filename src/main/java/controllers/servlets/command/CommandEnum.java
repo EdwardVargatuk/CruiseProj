@@ -12,17 +12,33 @@ public enum CommandEnum {
         }
 
     },
-    TOORDER{
+    TOORDER {
         {
-            this.command= new OrderPageCommand();
+            this.command = new OrderPageCommand();
         }
     },
-    CONFIRMORDER{
+    CONFIRMORDER {
         {
-            this.command= new ConfirmOrderCommand();
+            this.command = new ConfirmOrderCommand();
         }
     },
-    HOME{
+
+    UPDATEORDER {
+        {
+            this.command = new UpdateOrderCommand();
+        }
+    },
+    MYORDER{
+        {
+            this.command = new MyOrderCommand();
+        }
+    },
+    ADMINMENU{
+        {
+            this.command = new AdminMenuCommand();
+        }
+    },
+    HOME {
         {
             this.command = new HomeCommand();
         }

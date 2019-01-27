@@ -1,26 +1,25 @@
 package controllers.servlets.command;
 
 
-import controllers.resourse.MessageManager;
+import controllers.utils.MessageManager;
+import controllers.utils.SessionRequestContent;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 public class ActionFactory {
-    public ActionCommand defineCommand(HttpServletRequest request) {
+    public ActionCommand defineCommand(SessionRequestContent sessionRequestContent) {
         ActionCommand current = new EmptyCommand();
-// извлечение имени команды из запроса
-        String action = request.getParameter("command");
+        Map<String, Object> requestAttributes = sessionRequestContent.getRequestAttributes();
+        String action = sessionRequestContent.getRequestParameter("command");
         if (action == null || action.isEmpty()) {
-// если команда не задана в текущем запросе
+            // если команда не задана в текущем запросе
             return current;
         }
-// получение объекта, соответствующего команде
         try {
             CommandEnum currentEnum = CommandEnum.valueOf(action.toUpperCase());
             current = currentEnum.getCurrentCommand();
         } catch (IllegalArgumentException e) {
-            request.setAttribute("wrongAction", action
-                    + MessageManager.getProperty("message.wrongaction"));
+            requestAttributes.put("wrongAction", action + MessageManager.getProperty("message.wrongaction"));
         }
         return current;
     }

@@ -1,5 +1,7 @@
 package Beans;
 
+import java.util.List;
+
 public class Order extends Entity {
 
     public Order(Integer id, Integer cruiseId, double totalPrice, Integer clientId) {
@@ -9,17 +11,34 @@ public class Order extends Entity {
         this.clientId = clientId;
     }
 
-    public Order() {
+    public Order(Integer id, Integer cruiseId, double totalPrice, Integer clientId, List<Bonus> bonusList) {
+        super(id);
+        this.cruiseId = cruiseId;
+        this.totalPrice = totalPrice;
+        this.clientId = clientId;
+        this.bonusList = bonusList;
     }
-
-    private Integer cruiseId;
-    private  double totalPrice;
-    private Integer clientId;
 
     public Order(Integer cruiseId, double totalPrice, Integer clientId) {
         this.cruiseId = cruiseId;
         this.totalPrice = totalPrice;
         this.clientId = clientId;
+    }
+
+    public Order() {
+    }
+
+    private Integer cruiseId;
+    private double totalPrice;
+    private Integer clientId;
+    private List<Bonus> bonusList;
+
+    public List<Bonus> getBonusList() {
+        return bonusList;
+    }
+
+    public void setBonusList(List<Bonus> bonusList) {
+        this.bonusList = bonusList;
     }
 
     public Integer getClientId() {
