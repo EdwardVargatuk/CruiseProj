@@ -28,35 +28,30 @@ public class CruiseInfoCommand implements ActionCommand {
     public String execute(SessionRequestContent sessionRequestContent) {
         log.log(Level.INFO, "enter command cruiseInfo");
         Map<String, Object> requestAttributes = sessionRequestContent.getRequestAttributes();
+        Map<String, Object> sessionAttributes = sessionRequestContent.getSessionAttributes();
         Integer shipId = Integer.valueOf(sessionRequestContent.getRequestParameter("shipId"));
-        String page = null;
+        String page;
         Ship ship;
         Cruise cruiseUsual;
         Cruise cruisePremium;
 
-        try {
-            // Найти ship & cruise в DB.
-            ship = ServiceFactoryImpl.getInstance().getShipService().getById(shipId);
+        // find ship & cruise in DB.
+        ship = ServiceFactoryImpl.getInstance().getShipService().getById(shipId);
+        if (ship != null) {
             cruiseUsual = ServiceFactoryImpl.getInstance().getCruiseService().getByShipIdAndCruiseClass(shipId, "USUAL");
             cruisePremium = ServiceFactoryImpl.getInstance().getCruiseService().getByShipIdAndCruiseClass(shipId, "PREMIUM");
-            if (ship != null || cruiseUsual != null || cruisePremium != null) {
-                requestAttributes.put("cruiseUsual", cruiseUsual);
-                requestAttributes.put("cruisePremium", cruisePremium);
-                requestAttributes.put("ship", ship);
-                String str = null;
-                if (ship != null) {
-                    str = ship.getRoute().stream().map(Port::getPortName).collect(Collectors.joining(","));
-                }
-                requestAttributes.put("shipRoute", str);
-                page = ConfigurationManager.getProperty("path.page.tourInfo");
-                log.log(Level.INFO, "get info about ship");
-            } else {
-                MessageManager.getProperty("message.shipInfoerror");
-                page = ConfigurationManager.getProperty("path.page.main");
-                log.log(Level.DEBUG, MessageManager.getProperty("message.shipInfoerror"));
-            }
-        } catch (Exception e) {
-            log.log(Level.ERROR, "cruise info error " + e);
+            requestAttributes.put("cruiseUsual", cruiseUsual);
+            requestAttributes.put("cruisePremium", cruisePremium);
+            sessionAttributes.put("ship", ship);
+            String str;
+            str = ship.getRoute().stream().map(Port::getPortName).collect(Collectors.joining(","));
+            requestAttributes.put("shipRoute", str);
+            page = ConfigurationManager.getProperty("path.page.tourInfo");
+            log.log(Level.INFO, "get info about ship");
+        } else {
+            requestAttributes.put("error_ship_info", MessageManager.getProperty("message.shipInfoerror"));
+            page = ConfigurationManager.getProperty("path.page.main");
+            log.log(Level.DEBUG, MessageManager.getProperty("message.shipInfoerror"));
         }
         return page;
     }

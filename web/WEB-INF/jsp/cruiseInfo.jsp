@@ -33,75 +33,91 @@
 <hr/>
 <br>
 
-        <%--<input type="hidden" name="shipId" value="1"/>--%>
-        <%--<img src='<c:url value="/sourse/siljaLine.jpg">а</c:url>' width="450" height="400" alt="SILJA LINE"/>--%>
-        <%--<br>--%>
-        <%--<p style="text-align: center"><input class="btn-link" type="submit" value="More info about &quot;Silja Line&quot;"/></p>--%>
-        <%--<a href="${pageContext.request.contextPath}/home"> <p style="text-align: center"> More info about "Silja Line"<p/>--%>
-        <%--</a>--%>
+<%--<input type="hidden" name="shipId" value="1"/>--%>
+<%--<img src='<c:url value="/sourse/siljaLine.jpg">а</c:url>' width="450" height="400" alt="SILJA LINE"/>--%>
+<%--<br>--%>
+<%--<p style="text-align: center"><input class="btn-link" type="submit" value="More info about &quot;Silja Line&quot;"/></p>--%>
+<%--<a href="${pageContext.request.contextPath}/home"> <p style="text-align: center"> More info about "Silja Line"<p/>--%>
+<%--</a>--%>
 
-
-
-        <table align="center" cellpadding="20">
-
-            <tr>
-                <td><p style="text-align: left">Ship name: </p></td>
-                <td><p style="text-align: left"> &quot;${ship.shipName}&quot;</p></td>
-            </tr>
-            <tr>
-                <td><p style="text-align: left">Tour duration: </p></td>
-                <td><p style="text-align: left"> ${ship.tourDuration} days</p></td>
-            </tr>
-            <tr>
-                <td><p style="text-align: left">Count of ports: </p></td>
-                <td><p style="text-align: left"> ${ship.countOfPorts} beautiful ports </p></td>
-            </tr>
-            <tr>
-                <td><p style="text-align: left">The trip route: </p></td>
-                <td><p style="text-align: left"> ${shipRoute}</p></td>
-                <%--<td><p style="text-align: left"> ${ship.route}</p></td>--%>
-            </tr>
-            <tr>
-                <td><p style="text-align: left">Passenger capacity: </p></td>
-                <td><p style="text-align: left"> ${ship.passengerCapacity} lucky ones</p></td>
-            </tr>
-            <tr>
-                <td><p style="text-align: left">Ship`s staff: </p></td>
-                <td><p style="text-align: left"> ${ship.staff} professionals</p></td>
-            </tr>
-        </table>
-
-        <%--<p style="text-align: left">Ship name: ${ship.shipName}</p>--%>
-        <%--${ship.route}--%>
-        <%--fmt--%>
-        <div >
-        <h1>And especially for you, hot offer of January</h1>
-        </div>
 <div>
-    <form name="shipInfoForm" method="POST" action="controller">
-        <input type="hidden" name="command" value="order"/>
+    <h1>Ship info:</h1>
+</div>
+<table align="center" cellpadding="20">
+
+    <tr>
+        <td><p style="text-align: left">Ship name: </p></td>
+        <td><p style="text-align: left"> &quot;${ship.shipName}&quot;</p></td>
+    </tr>
+    <tr>
+        <td><p style="text-align: left">Tour duration: </p></td>
+        <td><p style="text-align: left"> ${ship.tourDuration} days</p></td>
+    </tr>
+    <tr>
+        <td><p style="text-align: left">Count of ports: </p></td>
+        <td><p style="text-align: left"> ${ship.countOfPorts} beautiful ports </p></td>
+    </tr>
+    <tr>
+        <td><p style="text-align: left">The trip route: </p></td>
+        <td><p style="text-align: left"> ${shipRoute}</p></td>
+        <%--<td><p style="text-align: left"> ${ship.route}</p></td>--%>
+    </tr>
+    <tr>
+        <td><p style="text-align: left">Passenger capacity: </p></td>
+        <td><p style="text-align: left"> ${ship.passengerCapacity} lucky ones</p></td>
+    </tr>
+    <tr>
+        <td><p style="text-align: left">Ship`s staff: </p></td>
+        <td><p style="text-align: left"> ${ship.staff} professionals</p></td>
+    </tr>
+</table>
+
+<%--<p style="text-align: left">Ship name: ${ship.shipName}</p>--%>
+<%--${ship.route}--%>
+<%--fmt--%>
+<div>
+    <h1>And especially for you, hot offer of January</h1>
+</div>
+<div>
+    <form name="shipInfoForm1" method="POST" action="controller">
+        <input type="hidden" name="command" value="toOrder"/>
+        <input type="hidden" name="cruiseId" value="${cruiseUsual.id}"/>
         <div class="form-style-9">
-            <tr>
-                <%--<td><p style="text-align: left">Cruise price: </p></td>--%>
-                <td><p style="text-align: left">Ordinary price  ${cruiseUsual.price} </p>
-                    <li>
-                        <%--<input class="field-style field-split align-left" placeholder="Name" type="text" --%>
-                        <%--value= "ordinary - 555"/>--%>
-                        <input type="submit" value="Take order"/>
-                    </li>
-                </td>
-                <td><p style="text-align: left">Premium price ${cruisePremium.price} </p>
-                    <li>
-                        <input type="submit" value="Take order"/>
-                    </li>
-                </td>
-            </tr>
+            <ul>
+                <h2 style="text-align: left">Ordinary price
+
+                    <fmt:setLocale value="en_US"/>
+                    <fmt:formatNumber value="${cruiseUsual.price}" type="currency"/></h2>
+                <br/>
+                <li>
+                    <input type="submit" value="Take order"/>
+                </li>
+            </ul>
+        </div>
+    </form>
+    <form name="shipInfoForm2" method="POST" action="controller">
+        <input type="hidden" name="command" value="toOrder"/>
+        <input type="hidden" name="cruiseId" value="${cruisePremium.id}"/>
+        <div class="form-style-9">
+            <%--<tr>--%>
+            <%--<td><p style="text-align: left">Cruise price: </p></td>--%>
+            <ul>
+                <h3 style="text-align: left">Premium price
+                    <fmt:setLocale value="en_US"/>
+                    <fmt:formatNumber value="${cruisePremium.price}" type="currency"/></h3>
+                <%--<h3>${cruisePremium.price} </h3></td>--%>
+                <li>
+                    <input type="submit" value="Take order"/>
+                </li>
+            </ul>
+
+
         </div>
     </form>
 
-
 </div>
 
+<p style="color: red; text-align: center">Sorry ${error_cruiseNull}<br/></p>
 
 <hr/>
 <c:import url="/WEB-INF/jsp/footer.jsp" charEncoding="utf-8"/>

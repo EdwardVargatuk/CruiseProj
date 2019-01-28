@@ -20,7 +20,7 @@ import java.util.*;
 @WebFilter(filterName = "AccessFilter", servletNames = "Controller",
         initParams = {
                 @WebInitParam(name = "admin", value = "adminMenu allClients allOrders allCruises editCruise"),
-                @WebInitParam(name = "client", value = "myOrder toorder updateOrder confirmOrder"),
+                @WebInitParam(name = "client", value = "myOrder toOrder updateOrder confirmOrder"),
                 @WebInitParam(name = "common", value = "logout"),
                 @WebInitParam(name = "out-of-control", value = "login tourInfo home")
         })

@@ -3,6 +3,7 @@ package service.impl;
 import Beans.Ship;
 import dao.mysql.MySqlDaoFactory;
 import service.ShipService;
+
 import java.util.List;
 
 public class ShipServiceImpl implements ShipService {
@@ -15,7 +16,8 @@ public class ShipServiceImpl implements ShipService {
     @Override
     public Ship getById(Integer id) {
         Ship ship = MySqlDaoFactory.getInstance().getShipDao().getById(id);
-        ship.setRoute(ServiceFactoryImpl.getInstance().getPortService().getAllByShipId(id));
+        if (ship != null)
+            ship.setRoute(ServiceFactoryImpl.getInstance().getPortService().getAllByShipId(id));
         return ship;
     }
 
