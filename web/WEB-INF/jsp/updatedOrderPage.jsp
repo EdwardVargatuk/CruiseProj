@@ -50,21 +50,22 @@
 </div>
 
 
+
 <div align="center">
     <form name="shipInfoForm1" method="POST" action="controller">
         <input type="hidden" name="command" value="confirmOrder"/>
 
         <%--<input type="hidden" name="cruise" value="${cruise}"/>--%>
-        <%--requestAttributes.put("cruise", cruise);--%>
-        <%--requestAttributes.put("excursionList", excursionList);--%>
-        <%--requestAttributes.put("portExcList", port_Excursions);--%>
-        <%--requestAttributes.put("ship", ship);--%>
+
         <li>
             <input class="form-submit-button" type="submit" value="Confirm"/>
         </li>
 
     </form>
 </div>
+<p style="color: red; text-align: center">${error_orderNull}<br/></p>
+<p style="color: red; text-align: center">${error_cruiseClientNull}<br/></p>
+
 <hr/>
 <c:import url="/WEB-INF/jsp/footer.jsp" charEncoding="utf-8"/>
 </body>

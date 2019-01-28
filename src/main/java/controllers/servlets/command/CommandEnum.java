@@ -1,5 +1,11 @@
 package controllers.servlets.command;
 
+/**
+ * CommandEnum with all available command
+ *
+ * @author Edward
+ */
+
 public enum CommandEnum {
     LOGIN {
         {

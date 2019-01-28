@@ -15,7 +15,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * ToOrder command for add excursion to cruise
+ * ToOrder command for obtain info about excursions of cruise
  *
  * @author Edward
  */
@@ -57,12 +57,13 @@ public class OrderPageCommand implements ActionCommand {
             } else {
                 log.log(Level.INFO, "excursion list is empty, goes to updatedOrder");
                 //if list is empty
+                sessionAttributes.put("cruise", cruise);
                 page = ConfigurationManager.getProperty("path.page.updatedOrderPage");
             }
         } else {
             requestAttributes.put("error_cruiseNull", MessageManager.getProperty("message.CruiseError"));
             page = ConfigurationManager.getProperty("path.page.tourInfo");
-            log.error("cruise not found");
+            log.log(Level.ERROR,"cruise not found");
         }
         return page;
     }

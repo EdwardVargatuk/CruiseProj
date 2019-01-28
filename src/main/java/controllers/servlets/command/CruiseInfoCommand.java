@@ -51,7 +51,7 @@ public class CruiseInfoCommand implements ActionCommand {
         } else {
             requestAttributes.put("error_ship_info", MessageManager.getProperty("message.shipInfoerror"));
             page = ConfigurationManager.getProperty("path.page.main");
-            log.log(Level.DEBUG, MessageManager.getProperty("message.shipInfoerror"));
+            log.log(Level.ERROR, MessageManager.getProperty("message.shipInfoerror"));
         }
         return page;
     }

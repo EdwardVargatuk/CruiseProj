@@ -14,6 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * main servlet
+ *
+ * @author Edward
+ */
+
+
 @WebServlet(name = "Controller", urlPatterns = "/controller")
 public class Controller extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
