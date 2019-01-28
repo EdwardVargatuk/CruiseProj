@@ -1,7 +1,6 @@
 package controllers.servlets.command;
 
 import Beans.Client;
-import Beans.Order;
 import controllers.utils.ConfigurationManager;
 import controllers.utils.SessionRequestContent;
 import org.apache.logging.log4j.Level;
@@ -13,25 +12,23 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * MyOrder command for getting all info about client
+ * AllClient command for get list of all clients who registered on web service
  *
  * @author Edward
  */
 
-public class MyOrderCommand implements ActionCommand {
+public class AllClientsCommand implements ActionCommand {
     private static final Logger log = LogManager.getLogger(MyOrderCommand.class.getName());
 
     @Override
     public String execute(SessionRequestContent sessionRequestContent) {
-        Map<String, Object> sessionAttributes = sessionRequestContent.getSessionAttributes();
+        Map<String, Object> requestAttributes = sessionRequestContent.getRequestAttributes();
         String page;
-
-        Client client = (Client) sessionAttributes.get("loginedUser");
-        List<Order> orderList = ServiceFactoryImpl.getInstance().getOrderService().getAllByClientId(client.getId());
-
-        sessionAttributes.put("order_list", orderList);
-        page = ConfigurationManager.getProperty("path.page.clientInfoPage");
-        log.log(Level.INFO, "Client-My orders command finished");
+        List<Client> clientList;
+        clientList = ServiceFactoryImpl.getInstance().getClientService().getAll();
+        requestAttributes.put("clientList", clientList);
+        page = ConfigurationManager.getProperty("path.page.allClients");
+        log.log(Level.INFO, "Get All clients command finished");
         return page;
     }
 }

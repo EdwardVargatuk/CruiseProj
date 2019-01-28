@@ -14,16 +14,6 @@
     <style>
         <%@include file="/WEB-INF/css/logStyle.css" %>
         <%@include file="/WEB-INF/css/style9.css" %>
-
-        /*body {*/
-        /*margin: 0; !* Убираем отступы *!*/
-        /*}*/
-
-        /*.child {*/
-
-        /*padding: 10%; !* Поля вокруг текста *!*/
-        /*margin: 10%; !* Отступы вокруг *!*/
-        /*}*/
     </style>
 </head>
 <body>

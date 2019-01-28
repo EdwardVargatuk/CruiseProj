@@ -1,3 +1,4 @@
+<%--@elvariable id="loginedUser" type="Beans.Client"--%>
 <%--
   Created by IntelliJ IDEA.
   User: Edward
@@ -17,38 +18,59 @@
     </style>
 </head>
 <body>
-
 <c:import url="/WEB-INF/jsp/header.jsp" charEncoding="utf-8"/>
 <c:import url="/WEB-INF/jsp/menu.jsp" charEncoding="utf-8"/>
 <br>
 <br/>
 <hr/>
+
 <br>
 <div>
-    <h1>Your orders</h1>
+    <h1>Your profile info</h1>
 </div>
 <div>
-    <table width="500" align="center" cellpadding="20">
-
+    <table>
         <tr>
-            <td><h2 style="text-align: left">Price of Cruise:</h2></td>
-            <td><h2 style="text-align: right" padding="200">
-                <fmt:setLocale value="en_US"/>
-                <fmt:formatNumber value="${submitOrder.totalPrice}" type="currency"/></h2></td>
             <td>
-                My orders: ${loginedUser.orders}
-            </td>
-            <td>
-                My orders: ${loginedUser.orders}
+                <p> My login: ${loginedUser.userName}</p>
             </td>
         </tr>
-
-
+        <tr>
+            <td>
+                <p>My password: ${loginedUser.password}</p>
+            </td>
+        </tr>
     </table>
+</div>
+
+<div>
+    <fmt:setLocale value="en_US"/>
+    <%--@elvariable id="order_list" type="Beans"--%>
+    <c:if test="${not empty order_list}">
+        <%--@elvariable id="order_list" type="java.util.List"--%>
+        <c:forEach var="elem" items="${order_list}">
+            <form name="orderForm" method="POST" action="controller">
+                <input type="hidden" name="command" value="viewOrderInfo"/>
+                <input type="hidden" name="cruise_Id" value="${elem.cruiseId}"/>
+                <p><c:out value="The number of ticket: ${elem.id }"/></p>
+                <p>
+                    <c:out value="Price of order "/>
+                    <fmt:formatNumber value="${elem.totalPrice }" type="currency"/>
+                </p>
+                <input class="form-submit-button" type="submit" value="View more info"/>
+            </form>
+        </c:forEach>
+    </c:if>
+</div>
+
+<div>
+    <c:if test="${empty order_list}">
+        <td><p>You have not made any orders yet</p></td>
+    </c:if>
+    <br>
 </div>
 
 <hr/>
 <c:import url="/WEB-INF/jsp/footer.jsp" charEncoding="utf-8"/>
-
 </body>
 </html>

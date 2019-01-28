@@ -42,20 +42,8 @@ public class UpdateOrderCommand implements ActionCommand {
         //temp cruise for price
         Cruise updatedCruise = new Cruise(cruise.getId(), cruise.getShip_id(), cruise.getCruiseClass(), finalSum, cruise.getDate());
         sessionAttributes.put("cruise", updatedCruise);
-        String page = ConfigurationManager.getProperty("path.page.updateOrderPage");
+        String page = ConfigurationManager.getProperty("path.page.updatedOrderPage");
         log.log(Level.INFO, "creation excursion list finished");
         return page;
     }
 }
-
-
-//             Найти ship & cruise в DB.
-
-//            requestAttributes.put("updatedPrice", sum);
-//            cruise = ServiceFactoryImpl.getInstance().getCruiseService().getById(cruiseId);
-//
-//            ship = ServiceFactoryImpl.getInstance().getShipService().getById(cruise.getShip_id());
-//
-//            List<Excursion> excursionList = ServiceFactoryImpl.getInstance().getExcursionService().getAllByCruise(cruise);
-//                            .getPortService().getAllByShipId(cruise.getShip_id())
-//                            .forEach(port -> ServiceFactoryImpl.getInstance().getExcursionService().getAllByPortId(port.getId()));

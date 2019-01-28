@@ -17,4 +17,8 @@ public interface OrderService {
     Order getById(Integer id);
 
     Order getByClientIdAndCruiseId(Integer clientId, Integer cruiseId);
+
+    List<Order> getAllByClientId(Integer clientId);
+
+    List<Order> getAllByCruiseId(Integer cruiseId);
 }

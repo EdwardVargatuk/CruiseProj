@@ -21,6 +21,5 @@ Status code: ${pageContext.errorData.statusCode} Take our apologies
 </c:if>
 
 <p>Back to <a href="controller?command=home">Home</a></p>
-
 </body>
 </html>

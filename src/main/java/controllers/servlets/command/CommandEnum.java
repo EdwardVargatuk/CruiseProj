@@ -34,14 +34,34 @@ public enum CommandEnum {
             this.command = new UpdateOrderCommand();
         }
     },
-    MYORDER{
+    MYORDER {
         {
             this.command = new MyOrderCommand();
         }
     },
-    ADMINMENU{
+    VIEWORDERINFO {
         {
-            this.command = new AdminMenuCommand();
+            this.command = new ViewOrderInfoCommand();
+        }
+    },
+    ALLCLIENTS {
+        {
+            this.command = new AllClientsCommand();
+        }
+    },
+    ALLORDERS {
+        {
+            this.command = new AllOrdersCommand();
+        }
+    },
+    ALLCRUISES {
+        {
+            this.command = new AllCruisesCommand();
+        }
+    },
+    EDITCRUISE {
+        {
+            this.command = new EditCruiseCommand();
         }
     },
     HOME {

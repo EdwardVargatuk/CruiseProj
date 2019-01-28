@@ -117,7 +117,7 @@
 
 </div>
 
-<p style="color: red; text-align: center">${error_cruiseNull}<br/></p>
+<h3 style="color: red; text-align: center">${error_cruiseNull}<br/></h3>
 
 <hr/>
 <c:import url="/WEB-INF/jsp/footer.jsp" charEncoding="utf-8"/>
