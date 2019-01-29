@@ -1,3 +1,4 @@
+<%--@elvariable id="clientListWithNumOrders" type="java.util.LinkedHashMap"--%>
 <%--
   Created by IntelliJ IDEA.
   User: Edward
@@ -28,26 +29,14 @@
     <div>
         <h1>List of all registered clients</h1>
     </div>
-
-
-    <c:if test="${not empty clientList}">
-
-        <c:forEach var="elem" items="${clientList}">
-            <%--<form name="orderForm" method="POST" action="controller">--%>
-            <%--<input type="hidden" name="command" value="viewOrderInfo"/>--%>
-            <%--<input type="hidden" name="cruise_Id" value="${elem.cruiseId}"/>--%>
-
-            <p><c:out value="Id of client: ${elem.id }"/></p>
-
-            <p><c:out value="Name of client: ${elem.userName }"/></p>
-            <p><c:out value="Password of client: ${elem.password }"/></p>
-            <p><c:out value="Role of client: ${elem.role }"/></p>
-
-
-            <%--to change--%>
-            <p><c:out value="Count of Orders ${elem }"/></p>
-<hr>
-
+    <c:if test="${not empty clientListWithNumOrders}">
+        <c:forEach var="entry" items="${clientListWithNumOrders}">
+            <p><c:out value="Id of client: ${entry.key.id}"/></p>
+            <p><c:out value="Name of client: ${entry.key.userName }"/></p>
+            <p><c:out value="Password of client: ${entry.key.password }"/></p>
+            <p><c:out value="Permisions of client: ${entry.key.role }"/></p>
+            <p><c:out value="Count of Orders: ${entry.value}"/></p>
+            <hr>
         </c:forEach>
     </c:if>
     <hr/>

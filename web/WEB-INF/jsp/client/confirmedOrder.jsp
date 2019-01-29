@@ -26,6 +26,7 @@
 <div>
     <h1>Your order info</h1>
 </div>
+<%--@elvariable id="submitOrder" type="Beans.Order"--%>
 <div>
     <table width="500" align="center" cellpadding="20">
         <tr>
@@ -42,6 +43,7 @@
     </table>
 </div>
 
+<%--@elvariable id="bonusList" type="Beans.Bonus"--%>
 <c:if test="${not empty bonusList}">
     <h1>And for your ticket status &quot;Premium&quot; Administrator of the ship Gives you a bonuses</h1>
     <div>

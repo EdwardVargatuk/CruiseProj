@@ -1,3 +1,4 @@
+<%--@elvariable id="cruise" type="Beans.Cruise"--%>
 <%--
   Created by IntelliJ IDEA.
   User: Edward
@@ -28,7 +29,6 @@
 </div>
 <div>
     <table align="center" cellpadding="20">
-
         <tr>
             <td><h2 style="text-align: left">Total price of Cruise:</h2></td>
             <td><h2 style="text-align: right" padding="200">
@@ -49,7 +49,6 @@
 <div align="center">
     <form name="shipInfoForm1" method="POST" action="controller">
         <input type="hidden" name="command" value="confirmOrder"/>
-        <%--<input type="hidden" name="cruise" value="${cruise}"/>--%>
         <input class="form-submit-button" type="submit" value="Confirm"/>
     </form>
 </div>

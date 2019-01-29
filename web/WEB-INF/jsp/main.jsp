@@ -16,7 +16,6 @@
     </style>
 </head>
 <body>
-
 <c:import url="/WEB-INF/jsp/parts/header.jsp" charEncoding="utf-8"/>
 <c:import url="/WEB-INF/jsp/parts/menu.jsp" charEncoding="utf-8"/>
 <br>
@@ -34,12 +33,6 @@
                                                  value="More info about &quot;Silja Line&quot;"/></p>
         </form>
     </div>
-    <%--<div>--%>
-    <%--<img src='<c:url value="/sourse/siljaLine.jpg">а</c:url>' width="450" height="400" alt="SILJA LINE"/>--%>
-    <%--<br>--%>
-    <%--<a href="${pageContext.request.contextPath}/home"> <p style="text-align: center"> More info about "Silja Line"<p/>--%>
-    <%--</a>--%>
-    <%--</div>--%>
     <div>
         <form name="viewForm" method="POST" action="controller">
             <input type="hidden" name="command" value="tourInfo"/>
@@ -48,8 +41,6 @@
             <br>
             <p style="text-align: center"><input class="btn-link" type="submit"
                                                  value="More info about &quot;Tallink&quot;"/></p>
-            <%--<a href="${pageContext.request.contextPath}/home"><p style="text-align: center"> More info about "Tallink"<p/>--%>
-            <%--</a>--%>
         </form>
     </div>
     <div>
@@ -60,8 +51,6 @@
             <br>
             <p style="text-align: center"><input class="btn-link" type="submit"
                                                  value="More info about &quot;Ляля Ратушна&quot;"/></p>
-            <%--<a href="${pageContext.request.contextPath}/home"> <p style="text-align: center"> More info about "Silja Line"<p/>--%>
-            <%--</a>--%>
         </form>
     </div>
 
@@ -69,17 +58,6 @@
 </div>
 <br>
 
-<%--<div class="conteiner">--%>
-
-<%--</div>--%>
-
-<%--<img src='<c:url value="/sourse/ляляРатушна.jpg">а</c:url>' width="450" height="400"/>--%>
-
-<%--<a href="${pageContext.request.contextPath}/home">more info about Tallink</a>--%>
-<%--<input type="hidden" method="POST" action="controler" name="command" value="logout"/>--%>
-
-
-<%--<a href="controller?command=logout">Logout</a>--%>
 <hr/>
 <c:import url="/WEB-INF/jsp/parts/footer.jsp" charEncoding="utf-8"/>
 </body>

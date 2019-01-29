@@ -18,7 +18,7 @@
 </head>
 <body>
 <div class="form-style-9">
-    <h1><br/>Welcome! </br>A cruise of your dreams is waiting for you! <br/></h1>
+    <h1><br/>Welcome! <br>A cruise of your dreams is waiting for you! <br/></h1>
     <ul>
         <form name="loginForm" method="POST" action="controller">
             <input type="hidden" name="command" value="login"/>
@@ -26,14 +26,14 @@
                 <label for="nameL">
                     <span>User name:  <br/></span>
                     <input class="field-style field-split align-left" placeholder="Name" type="text" id="nameL"
-                           name="userName" value= "${client.userName}"/>
+                           name="userName" value= ""/>
                 </label>
             </li>
             <li>
                 <label for="passwordL">
                     <span>   <br/>Password:<br/></span>
                     <input class="field-style field-split align-left" placeholder="Password" type="password"
-                           id="passwordL" name="password" value= "${user.password}"/>
+                           id="passwordL" name="password" value= ""/>
                 </label>
             </li>
             <br><br/>

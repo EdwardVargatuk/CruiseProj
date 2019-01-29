@@ -1,3 +1,6 @@
+<%--@elvariable id="portExcList" type="Beans.PortExcursion"--%>
+<%--@elvariable id="ship" type="Beans.Ship"--%>
+<%--@elvariable id="cruise" type="Beans.Cruise"--%>
 <%--
   Created by IntelliJ IDEA.
   User: Edward
@@ -29,7 +32,6 @@
 </div>
 <div>
     <table align="center" cellpadding="20">
-
         <tr>
             <td><h2 style="text-align: left">Total price of Cruise:</h2></td>
             <td><h2 style="text-align: right" padding="200">
@@ -44,72 +46,44 @@
             <td><h2 style="text-align: left">Ship:</h2></td>
             <td><h2 style="text-align: right" padding="200">${ship.shipName}</h2></td>
         </tr>
-
     </table>
 </div>
 <div>
-
     <form name="orderForm" method="POST" action="controller">
-
         <table cellspacing="10" cellpadding="5" align="center">
             <tr>
                 <td><p style="text-align: center">Name of port</p></td>
                 <td><p style="text-align: center">Name of excursion</p></td>
                 <td><p style="text-align: center">Price</p></td>
             </tr>
-
             <c:forEach var="elem" items="${portExcList}">
                 <tr>
-                        <%--<p>Name of excursion</p>--%>
                     <td><p><c:out value="   ${ elem.portName }"/></p></td>
                     <td><p><c:out value=" ${ elem.excursionName }"/></p></td>
                     <td><p><c:out value="${ elem.excursionPrice }"/></p></td>
                     <td><input type="checkbox" name="selected" value="${elem.excursionPrice}"/></td>
-                        <%--<c:set var = "salary" scope = "session" value = "${ elem.excursionPrice }"/>--%>
-                        <%--<c:if  test = "${salary = 2000}">--%>
-
                 </tr>
             </c:forEach>
 
-
-            <%--<c:forEach var="mapp" items="${excursionList}">--%>
-            <%--<tr>--%>
-            <%--<p>Name of excursion</p>--%>
-            <%--<td><c:out value="${ elem.excursionName }"/></td>--%>
-
-            <%--<td><input type="checkbox" name="choose" value="Y"/></td>--%>
-            <%--&lt;%&ndash;<c:set var = "salary" scope = "session" value = "${ elem.excursionPrice }"/>&ndash;%&gt;--%>
-            <%--&lt;%&ndash;<c:if  test = "${salary = 2000}">&ndash;%&gt;--%>
-            <%--<td><c:out value="${ elem.excursionPrice }"/></td>--%>
             <input type="hidden" name="command" value="updateOrder"/>
-            <%--<input type="hidden" name="cruisePrice" value="${cruise.price}"/>--%>
-            <%--<input type="hidden" name="cruisePr" value="${cruise}"/>--%>
             <tr>
                 <td>
-
-                <%--<li>--%>
-                <input class="form-submit-button" type="submit" value="Update price"/>
-                <%--</li>--%>
+                    <input class="form-submit-button" type="submit" value="Update price"/>
                 </td>
             </tr>
-            <%--</tr>--%>
-            <%--</c:forEach>--%>
             <tr>
                 <td>
 
                 </td>
             </tr>
-
         </table>
     </form>
 </div>
+
 <div align="center">
     <form name="shipInfoForm1" method="POST" action="controller">
         <input type="hidden" name="command" value="confirmOrder"/>
-
         <input class="form-submit-button" type="submit" value="Confirm without excursion"/>
-
-
     </form>
 </div>
 

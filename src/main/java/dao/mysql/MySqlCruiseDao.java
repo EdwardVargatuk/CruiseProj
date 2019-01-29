@@ -16,7 +16,7 @@ public class MySqlCruiseDao implements CruiseDao {
 
     @Override
     public void create(Cruise cruise) {
-        String sqlStatement = "INSERT INTO cruise (ship_id, cruise_class, price, date) VALUES (?,?,?,?)";
+        String sqlStatement = "INSERT INTO cruisedb.cruise (ship_id, cruise_class, price, date) VALUES (?,?,?,?)";
         try (Connection connection = MySqlConnectionPool.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sqlStatement,
                     Statement.RETURN_GENERATED_KEYS);
@@ -44,7 +44,7 @@ public class MySqlCruiseDao implements CruiseDao {
 
     @Override
     public void update(Cruise cruise) {
-        String sqlStatement = "UPDATE cruise SET ship_id=?, cruise_class=?, price = ?," +
+        String sqlStatement = "UPDATE cruisedb.cruise SET ship_id=?, cruise_class=?, price = ?," +
                 " date=? WHERE id = ?";
         try (Connection connection = MySqlConnectionPool.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sqlStatement);
@@ -65,7 +65,7 @@ public class MySqlCruiseDao implements CruiseDao {
 
     @Override
     public void delete(Cruise cruise) {
-        String sqlStatement = "DELETE FROM cruise WHERE id = ?";
+        String sqlStatement = "DELETE FROM cruisedb.cruise WHERE id = ?";
         try (Connection connection = MySqlConnectionPool.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sqlStatement);
             statement.setInt(1, cruise.getId());
@@ -82,7 +82,7 @@ public class MySqlCruiseDao implements CruiseDao {
 
     @Override
     public Cruise getById(Integer id) {
-        String sqlStatement = "SELECT ship_id, cruise_class, price, date FROM cruise WHERE id = ?";
+        String sqlStatement = "SELECT ship_id, cruise_class, price, date FROM cruisedb.cruise WHERE id = ?";
         Cruise cruise = null;
         try (Connection connection = MySqlConnectionPool.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sqlStatement);
@@ -107,7 +107,7 @@ public class MySqlCruiseDao implements CruiseDao {
 
     @Override
     public Cruise getByShipIdAndCruiseClass(Integer shipId, String cruiseClass) {
-        String sqlStatement = "SELECT id, ship_id, cruise_class, price, date FROM cruise WHERE ship_id = ? AND cruise_class =?";
+        String sqlStatement = "SELECT id, ship_id, cruise_class, price, date FROM cruisedb.cruise WHERE ship_id = ? AND cruise_class =?";
         Cruise cruise = null;
         try (Connection connection = MySqlConnectionPool.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sqlStatement);
@@ -134,7 +134,7 @@ public class MySqlCruiseDao implements CruiseDao {
 
     @Override
     public List<Cruise> getAll() {
-        String sqlStatement = "SELECT ship_id, cruise_class, price, date FROM cruise";
+        String sqlStatement = "SELECT * FROM cruisedb.cruise";
         List<Cruise> cruiseList = new ArrayList<>();
         try (Connection connection = MySqlConnectionPool.getConnection()) {
             Statement statement = connection.createStatement();

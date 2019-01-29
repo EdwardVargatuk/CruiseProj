@@ -8,8 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import service.impl.ServiceFactoryImpl;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * AllClient command for get list of all clients who registered on web service
@@ -18,7 +17,7 @@ import java.util.Map;
  */
 
 public class AllClientsCommand implements ActionCommand {
-    private static final Logger log = LogManager.getLogger(MyOrderCommand.class.getName());
+    private static final Logger log = LogManager.getLogger(AllClientsCommand.class.getName());
 
     @Override
     public String execute(SessionRequestContent sessionRequestContent) {
@@ -26,7 +25,14 @@ public class AllClientsCommand implements ActionCommand {
         String page;
         List<Client> clientList;
         clientList = ServiceFactoryImpl.getInstance().getClientService().getAll();
-        requestAttributes.put("clientList", clientList);
+        Map<Client, Integer> clientListWithNumOrders = new LinkedHashMap<>();
+        clientList.forEach(client -> clientListWithNumOrders.put(client, ServiceFactoryImpl.getInstance().getOrderService().getAllByClientId(client.getId()).size()));
+//        for (Client client : clientList) {
+//            List<Order> orders = ServiceFactoryImpl.getInstance().getOrderService().getAllByClientId(client.getId());
+//            long count = (long) orders.size();
+//            clientListWithNumOrders.put(client, count);
+//        }
+        requestAttributes.put("clientListWithNumOrders", clientListWithNumOrders);
         page = ConfigurationManager.getProperty("path.page.allClients");
         log.log(Level.INFO, "Get All clients command finished");
         return page;
