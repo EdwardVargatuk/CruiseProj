@@ -125,8 +125,8 @@ public class MySqlOrderDao implements OrderDao {
     }
 
     @Override
-    public Order getByClientIdAndCruiseId(Integer clientId, Integer cruiseId) {
-        String sqlStatement = "SELECT * FROM cruisedb.order WHERE client_id = ? AND cruise_id=?";
+    public Order getLastByClientIdAndCruiseId(Integer clientId, Integer cruiseId) {
+        String sqlStatement = "SELECT * FROM cruisedb.order WHERE client_id = ? AND cruise_id=? ORDER BY id DESC";
         Order order = null;
         try (Connection connection = MySqlConnectionPool.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sqlStatement);
@@ -144,7 +144,7 @@ public class MySqlOrderDao implements OrderDao {
             resultSet.close();
             statement.close();
         } catch (SQLException e) {
-            log.log(Level.ERROR, "Can't get order by id" + e);
+            log.log(Level.ERROR, "Can't get order by Client id and cruise id" + e);
         }
         return order;
     }

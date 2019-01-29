@@ -41,7 +41,7 @@ public class ConfirmOrderCommand implements ActionCommand {
             Order order = new Order(cruise.getId(), cruise.getPrice(), client.getId());
             ServiceFactoryImpl.getInstance().getOrderService().create(order);
             //for check
-            Order confirmedOrder = ServiceFactoryImpl.getInstance().getOrderService().getByClientIdAndCruiseId(client.getId(), cruise.getId());
+            Order confirmedOrder = ServiceFactoryImpl.getInstance().getOrderService().getLastByClientIdAndCruiseId(client.getId(), cruise.getId());
             if (confirmedOrder != null) {
                 //get all bonuses for cruise class(PREMIUM)
                 List<Bonus> bonusList = ServiceFactoryImpl.getInstance().getBonusService().getAllByCruiseId(cruise.getId());

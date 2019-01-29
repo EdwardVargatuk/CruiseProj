@@ -19,8 +19,8 @@
 <body>
 <div>
 
-    <c:import url="/WEB-INF/jsp/header.jsp" charEncoding="utf-8"/>
-    <c:import url="/WEB-INF/jsp/menu.jsp" charEncoding="utf-8"/>
+    <c:import url="/WEB-INF/jsp/parts/header.jsp" charEncoding="utf-8"/>
+    <c:import url="/WEB-INF/jsp/parts/menu.jsp" charEncoding="utf-8"/>
     <br>
     <br/>
     <hr/>
@@ -39,15 +39,19 @@
 
             <p><c:out value="Id of client: ${elem.id }"/></p>
 
-            <p><c:out value="Name of client ${elem.userName }"/></p>
-            <p><c:out value="Password of client ${elem.password }"/></p>
-            <p><c:out value="Role of client ${elem.role }"/></p>
-            <p><c:out value="Orders ${elem.orders }"/></p>
+            <p><c:out value="Name of client: ${elem.userName }"/></p>
+            <p><c:out value="Password of client: ${elem.password }"/></p>
+            <p><c:out value="Role of client: ${elem.role }"/></p>
 
+
+            <%--to change--%>
+            <p><c:out value="Count of Orders ${elem }"/></p>
+<hr>
 
         </c:forEach>
     </c:if>
-
+    <hr/>
+    <c:import url="/WEB-INF/jsp/parts/footer.jsp" charEncoding="utf-8"/>
 </div>
 </body>
 </html>

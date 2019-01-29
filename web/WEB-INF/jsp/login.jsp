@@ -50,7 +50,7 @@
     </ul>
 </div>
 
-<c:import url="/WEB-INF/jsp/footer.jsp" charEncoding="utf-8"/>
+<c:import url="/WEB-INF/jsp/parts/footer.jsp" charEncoding="utf-8"/>
 
 </body>
 </html>

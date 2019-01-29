@@ -36,8 +36,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order getByClientIdAndCruiseId(Integer clientId, Integer cruiseId) {
-        return MySqlDaoFactory.getInstance().getOrderDao().getByClientIdAndCruiseId(clientId, cruiseId);
+    public Order getLastByClientIdAndCruiseId(Integer clientId, Integer cruiseId) {
+        return MySqlDaoFactory.getInstance().getOrderDao().getLastByClientIdAndCruiseId(clientId, cruiseId);
     }
 
     @Override

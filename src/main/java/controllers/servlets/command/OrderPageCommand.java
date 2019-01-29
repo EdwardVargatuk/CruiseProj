@@ -63,7 +63,7 @@ public class OrderPageCommand implements ActionCommand {
         } else {
             requestAttributes.put("error_cruiseNull", MessageManager.getProperty("message.CruiseError"));
             page = ConfigurationManager.getProperty("path.page.tourInfo");
-            log.log(Level.ERROR,"cruise not found");
+            log.log(Level.ERROR, "cruise not found");
         }
         return page;
     }

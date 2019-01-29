@@ -17,8 +17,8 @@
     </style>
 </head>
 <body>
-<c:import url="/WEB-INF/jsp/header.jsp" charEncoding="utf-8"/>
-<c:import url="/WEB-INF/jsp/menu.jsp" charEncoding="utf-8"/>
+<c:import url="/WEB-INF/jsp/parts/header.jsp" charEncoding="utf-8"/>
+<c:import url="/WEB-INF/jsp/parts/menu.jsp" charEncoding="utf-8"/>
 <br>
 <br/>
 <hr/>
@@ -82,8 +82,8 @@
             <%--&lt;%&ndash;<c:if  test = "${salary = 2000}">&ndash;%&gt;--%>
             <%--<td><c:out value="${ elem.excursionPrice }"/></td>--%>
             <input type="hidden" name="command" value="updateOrder"/>
-            <input type="hidden" name="cruisePrice" value="${cruise.price}"/>
-            <input type="hidden" name="cruisePr" value="${cruise}"/>
+            <%--<input type="hidden" name="cruisePrice" value="${cruise.price}"/>--%>
+            <%--<input type="hidden" name="cruisePr" value="${cruise}"/>--%>
             <tr>
                 <td>
 
@@ -96,23 +96,24 @@
             <%--</c:forEach>--%>
             <tr>
                 <td>
-                    <div align="center">
-                        <form name="shipInfoForm1" method="POST" action="controller">
-                            <input type="hidden" name="command" value="confirmOrder"/>
 
-                                <input class="form-submit-button" type="submit" value="Confirm without excursion"/>
-
-
-                        </form>
-                    </div>
                 </td>
             </tr>
 
         </table>
     </form>
 </div>
+<div align="center">
+    <form name="shipInfoForm1" method="POST" action="controller">
+        <input type="hidden" name="command" value="confirmOrder"/>
+
+        <input class="form-submit-button" type="submit" value="Confirm without excursion"/>
+
+
+    </form>
+</div>
 
 <hr/>
-<c:import url="/WEB-INF/jsp/footer.jsp" charEncoding="utf-8"/>
+<c:import url="/WEB-INF/jsp/parts/footer.jsp" charEncoding="utf-8"/>
 </body>
 </html>

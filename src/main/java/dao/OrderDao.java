@@ -17,7 +17,7 @@ public interface OrderDao {
 
     Order getById(Integer id);
 
-    Order getByClientIdAndCruiseId(Integer clientId, Integer cruiseId);
+    Order getLastByClientIdAndCruiseId(Integer clientId, Integer cruiseId);
 
 
 }

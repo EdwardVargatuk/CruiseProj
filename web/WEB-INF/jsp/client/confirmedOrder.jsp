@@ -17,8 +17,8 @@
     </style>
 </head>
 <body>
-<c:import url="/WEB-INF/jsp/header.jsp" charEncoding="utf-8"/>
-<c:import url="/WEB-INF/jsp/menu.jsp" charEncoding="utf-8"/>
+<c:import url="/WEB-INF/jsp/parts/header.jsp" charEncoding="utf-8"/>
+<c:import url="/WEB-INF/jsp/parts/menu.jsp" charEncoding="utf-8"/>
 <br>
 <br/>
 <hr/>
@@ -60,6 +60,6 @@
 </c:if>
 
 <hr/>
-<c:import url="/WEB-INF/jsp/footer.jsp" charEncoding="utf-8"/>
+<c:import url="/WEB-INF/jsp/parts/footer.jsp" charEncoding="utf-8"/>
 </body>
 </html>
