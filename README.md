@@ -12,4 +12,5 @@
 2. Use pom.xml for dependencies
 3. Install and configure Tomcat 9.0.14, choose CruiseProj_Web_exploded artifact and ports
 4. Run it on a local server
-5. To login use passwords from cruisedb.user
+5. Run createSchemaWithData.sql from resourses folder
+6. To login use passwords from cruisedb.user
