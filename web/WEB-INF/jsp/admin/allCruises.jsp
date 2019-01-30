@@ -1,3 +1,4 @@
+<%--@elvariable id="cruiseShipMap" type="java.util.LinkedHashMap"--%>
 <%--
   Created by IntelliJ IDEA.
   User: Edward
@@ -27,13 +28,13 @@
     <div>
         <h1>List of all available cruise</h1>
     </div>
-    <c:if test="${not empty cruiseList}">
-        <c:forEach var="elem" items="${cruiseList}">
-            <p><c:out value="Id of cruise: ${elem.id}"/></p>
-            <p><c:out value="Class of cruise: ${elem.cruiseClass }"/></p>
-            <p><c:out value="Price of cruise: ${elem.price }"/></p>
-            <p><c:out value="Date of departure: ${elem.date}"/></p>
-            <p><c:out value="Count of Orders ${ship.shipName}"/></p>
+    <c:if test="${not empty cruiseShipMap}">
+        <c:forEach var="entry" items="${cruiseShipMap}">
+            <p><c:out value="Id of cruise: ${entry.key.id}"/></p>
+            <p><c:out value="Class of cruise: ${entry.key.cruiseClass }"/></p>
+            <p><c:out value="Price of cruise: ${entry.key.price }"/></p>
+            <p><c:out value="Date of departure: ${entry.key.date}"/></p>
+            <p><c:out value="The ship: &quot;${entry.value.shipName}&quot;"/></p>
             <hr>
         </c:forEach>
     </c:if>

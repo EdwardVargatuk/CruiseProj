@@ -25,4 +25,13 @@ public class Bonus extends Entity {
                 "bonusName='" + bonusName + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Bonus bonus = (Bonus) o;
+        return getBonusName().equals(bonus.getBonusName());
+    }
+
 }

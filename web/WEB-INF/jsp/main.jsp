@@ -27,7 +27,7 @@
         <form name="viewForm" method="POST" action="controller">
             <input type="hidden" name="command" value="tourInfo"/>
             <input type="hidden" name="shipId" value="1"/>
-            <img src='<c:url value="/sourse/siljaLine.jpg">а</c:url>' width="450" height="400" alt="SILJA LINE"/>
+            <img src='<c:url value="/sourse/siljaLine.jpg">а</c:url>' width="420" height="380" alt="SILJA LINE"/>
             <br>
             <p style="text-align: center"><input class="btn-link" type="submit"
                                                  value="More info about &quot;Silja Line&quot;"/></p>
@@ -37,7 +37,7 @@
         <form name="viewForm" method="POST" action="controller">
             <input type="hidden" name="command" value="tourInfo"/>
             <input type="hidden" name="shipId" value="2"/>
-            <img src='<c:url value="/sourse/tallink.jpg">а</c:url>' width="450" height="400" alt="TALLINK"/>
+            <img src='<c:url value="/sourse/tallink.jpg">а</c:url>' width="420" height="380" alt="TALLINK"/>
             <br>
             <p style="text-align: center"><input class="btn-link" type="submit"
                                                  value="More info about &quot;Tallink&quot;"/></p>
@@ -47,7 +47,7 @@
         <form name="viewForm" method="POST" action="controller">
             <input type="hidden" name="command" value="tourInfo"/>
             <input type="hidden" name="shipId" value="3"/>
-            <img src='<c:url value="/sourse/ляляРатушна.jpg">а</c:url>' width="450" height="400" alt=""/>
+            <img src='<c:url value="/sourse/ляляРатушна.jpg">а</c:url>' width="420" height="380" alt=""/>
             <br>
             <p style="text-align: center"><input class="btn-link" type="submit"
                                                  value="More info about &quot;Ляля Ратушна&quot;"/></p>
