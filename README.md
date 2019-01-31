@@ -14,3 +14,17 @@
 4. Run it on a local server
 5. Run createSchemaWithData.sql from resourses folder
 6. To login use passwords from cruisedb.user
+
+P.S.
+ public static void main(String[] args) {
+
+        String s = "My name is Yaroslav";
+        List<String> list = Arrays.asList(s.split(" "));
+        list.stream().sorted(Comparator.reverseOrder()).forEach(System.out::println);
+        String[] strings = s.split(" ");
+        System.out.println("second variant is better");
+        for (int i = strings.length - 1; i >= 0; i--) {
+            System.out.println(strings[i]);
+
+        }
+    }
